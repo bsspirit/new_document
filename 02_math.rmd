@@ -5,13 +5,6 @@ date: '2022-09-25'
 output: html_document
 ---
 
-```{r}
-library(readxl)
-datasets <- readxl_example("datasets.xlsx")
-read_excel(datasets)
-
-```
-
 内行插入一个公式$5^2=3^2+4^2$
 
 多行公式
@@ -208,10 +201,12 @@ $$
 
 $$
 
+$$
+\hat\beta_1=\frac{\sum\left(X_i-\overline{X}\right)Y_i}{\sum\left(X_i-\overline{X}\right)^2}=\frac{\sum X_iY_i-\overline{X}\sum Y_i}{\sum X_i^2+\sum \overline{X}^2 - 2\overline{X}\sum X_i}\\
+=\frac{\sum X_iY_i-\overline{X}*N\overline{Y}}{\sum X_i^2+N\overline{X}^2 - 2\overline{X}*N\overline{X}}
+=\frac{\sum^{N}_{i=1} X_iY_i-N\overline{XY}}{\sum^{N}_{i=1}Xi^2-N\overline{X}^2}
+$$
 
-
-
-## 2b
 
 $$
 SSR=\sum^{N}_{i=1}E_i^2=\sum\left(Y_i-\beta_0\right)^2\\
@@ -220,7 +215,7 @@ SSR=\sum^{N}_{i=1}E_i^2=\sum\left(Y_i-\beta_0\right)^2\\
 => R^2=1-\frac{SSR}{SST}=0
 $$
 
-# 3 
+
 $$
 Let \ Y_{0.5} \ to \ be \ Y_i's \ median, \\
 SST = \sum^{N}_{i=1}\left(Y_i-\overline{Y}\right)^2=\sum\left(\overline{Y_i}+\hat E_i-\overline{Y}\right)^2=\sum\left(Y_{0.5}+\hat E_i-\overline{Y}\right)^2\\
@@ -232,12 +227,6 @@ R^2=1-\frac{\sum^{N}_{i=1}\hat E_i}{
 }
 $$
 
-# 15 (i)
-$$
-T_{a+e} = E[Y_{1i}-Y_{0i}]=E[y_i\left(1\right)-y_i\left(0\right)]\\
-For the sample, T_{a+e} =N^{-1}\sum^{N}_{i=1}[y_i\left(1\right)-y_i\left(0\right)]=\overline{y}\left(1\right)-\overline{y}\left(0\right)
-$$
-# 15 (ii)
 
 $$
 y_i=\beta_0+\beta_1X_i+\mu_i=\overline{y_0}+\Phi X_i+\mu_i\\
@@ -247,7 +236,7 @@ y\left(1\right)=\overline{y_0}+\left(\overline{y_1}-\overline{y_0}\right)+\mu_i\
 y\left(1\right)=\frac{1}{N}\sum^{N}_{i=1}\left(\overline{y_1}+\mu_i\left(1\right)\right)=\overline{y_1}+\frac{1}{N}\sum\mu_i\left(1\right)\\
 $$
 
-# 16(i)
+
 $$
 X_i=\begin{cases}
 1 \ when \ participate\\
@@ -263,7 +252,7 @@ So \ E[y_i\left(1\right)-y_i\left(0\right)|X_i]\ne E[y_i\left(1\right)-y_i\left(
 and \ no \ longer \ unbiased
 $$
 
-# 17 (i)
+
 $$
 E[\mu_i] = E[1-X_i]E[\mu_i\left(0\right)]+E[X_i]E[\mu_i\left(1\right)]\\
 var\left(\mu_i|X_i\right)=E[\mu_i-E(\mu_i)]^2\\
