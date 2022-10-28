@@ -1,0 +1,165 @@
+---
+title: "R Markdown Demo "
+author: "http://fens.me"
+date: '2022-09-24'
+output: html_document
+---
+
+# 这是一级标题
+## 这是二级标题
+### 这是三级标题
+#### 这是四级标题
+##### 这是五级标题
+###### 这是六级标题
+
+
+**这是加粗的文字**
+
+*这是倾斜的文字*`
+
+***这是斜体加粗的文字***
+
+~~这是加删除线的文字~~
+
+<font face="宋体">宋体</font>
+
+<font face="宋体" color="red">红色宋体</font>
+
+<font face="宋体" color="red" size="5">5号红色宋体</font>
+
+
+> 我要引用一段文字\
+\
+R语言作为统计学一门语言，一直在小众领域闪耀着光芒。直到大数据的爆发，R语言变成了一门炙手可热的数据分析的利器。随着越来越多的工程背景的人的加入，R语言的社区在迅速扩大成长。现在已不仅仅是统计领域，教育，银行，电商，互联网….都在使用R语言。
+
+--开始
+
+---
+
+**开始
+
+********************
+
+结束
+
+
+![R的极客理想](http://fens.me/images/slider/img4.png)
+
+[粉丝日志博客](fens.me)
+
+<http://www.fens.me>
+
+无序列表
+
++ 列表内容
++ 列表内容
++ 列表内容
+
+
+有序列表
+
+1. 列表内容
+2. 列表内容
+3. 列表内容
+
+无序列表嵌套
+
++ 1 列表内容
+   + 1.1 列表内容
+   + 1.2 列表内容
++ 2 列表内容
++ 3 列表内容
+
+
+
+
+表头|表头|表头
+---|:--:|---:
+内容|内容|内容
+内容|内容|内容
+
+
+表头|表头|表头
+--|--|--
+内容|内容|内容
+内容|内容|内容
+
+
+文字中内嵌了`a="abc"`代码
+
+
+```
+a="abc"
+a1=2
+a2=3
+a3=a1+a2
+```
+
+
+
+
+
+```{r}
+a<-Sys.Date()
+a
+
+head(iris)
+plot(iris)
+```
+
+
+
+
+
+
+
+
+
+
+```{r echo=FALSE}
+library(xts)
+xdf<-xts(rnorm(100),order.by = as.Date('2022-01-01')+1:100)
+plot(xdf)
+```
+
+```{r}
+library(DT)
+datatable(iris)
+```
+
+
+```{r}
+library(echarts4r)
+library(magrittr)
+iris %>% 
+  e_charts(x = Sepal.Length) %>%
+  e_scatter(serie = Sepal.Width )
+```
+
+
+
+$$
+\hat\beta_1=\frac{\sum\left(X_i-\overline{X}\right)Y_i}{\sum\left(X_i-\overline{X}\right)^2}=\frac{\sum X_iY_i-\overline{X}\sum Y_i}{\sum X_i^2+\sum \overline{X}^2 - 2\overline{X}\sum X_i}\\
+=\frac{\sum X_iY_i-\overline{X}*N\overline{Y}}{\sum X_i^2+N\overline{X}^2 - 2\overline{X}*N\overline{X}}
+=\frac{\sum^{N}_{i=1} X_iY_i-N\overline{XY}}{\sum^{N}_{i=1}Xi^2-N\overline{X}^2}
+$$
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
