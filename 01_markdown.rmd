@@ -1,6 +1,6 @@
 ---
 title: "R Markdown Demo "
-author: "http://fens.me"
+author: "http://blog.fens.me/r-markdown-rmarkdown/"
 date: '2022-09-24'
 output: html_document
 ---
@@ -96,9 +96,6 @@ a3=a1+a2
 ```
 
 
-
-
-
 ```{r}
 a<-Sys.Date()
 a
@@ -106,15 +103,6 @@ a
 head(iris)
 plot(iris)
 ```
-
-
-
-
-
-
-
-
-
 
 ```{r echo=FALSE}
 library(xts)
@@ -127,7 +115,6 @@ library(DT)
 datatable(iris)
 ```
 
-
 ```{r}
 library(echarts4r)
 library(magrittr)
@@ -136,30 +123,8 @@ iris %>%
   e_scatter(serie = Sepal.Width )
 ```
 
-
-
 $$
 \hat\beta_1=\frac{\sum\left(X_i-\overline{X}\right)Y_i}{\sum\left(X_i-\overline{X}\right)^2}=\frac{\sum X_iY_i-\overline{X}\sum Y_i}{\sum X_i^2+\sum \overline{X}^2 - 2\overline{X}\sum X_i}\\
 =\frac{\sum X_iY_i-\overline{X}*N\overline{Y}}{\sum X_i^2+N\overline{X}^2 - 2\overline{X}*N\overline{X}}
 =\frac{\sum^{N}_{i=1} X_iY_i-N\overline{XY}}{\sum^{N}_{i=1}Xi^2-N\overline{X}^2}
 $$
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
