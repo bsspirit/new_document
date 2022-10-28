@@ -1,9 +1,11 @@
 ---
-title: "test2"
-author: "dan"
+title: "math formula"
+author: "zhang dan"
 date: '2022-09-25'
 output: html_document
 ---
+
+## http://blog.fens.me/r-markdown-math-latex/
 
 内行插入一个公式$5^2=3^2+4^2$
 
