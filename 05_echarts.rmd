@@ -1,0 +1,108 @@
+---
+title: "echarts"
+author: "dan"
+date: '2022-11-04'
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(echarts4r)
+library(magrittr)
+```
+
+```{r}
+df <- state.x77 %>%
+  as.data.frame() %>%
+  tibble::rownames_to_column("State")
+df
+
+df %>% 
+  e_charts(State) %>% # initialise and set x
+  e_line(Population, smooth = TRUE) %>%  # add a line
+  e_area(Income, smooth = TRUE) %>%  # add area
+  e_axis_labels(x = "State") %>% # axis labels
+  e_title("US States", "Population & Income") %>%  # Add title & subtitle
+  e_theme("infographic") %>%  # theme
+  e_legend(right = 0) %>%  # move legend to the bottom
+  e_tooltip(trigger = "axis") # tooltip
+```
+
+```{r}
+df <- data.frame(
+  x = LETTERS[1:10],
+  a = runif(10),
+  b = runif(10),
+  c = runif(10),
+  d = runif(10)
+)
+
+df %>%
+  e_charts(x) %>%
+  e_bar(a, stack = "grp") %>%
+  e_bar(b, stack = "grp") %>%
+  e_bar(c, stack = "grp2") %>%
+  e_bar(d, stack = "grp2") 
+```
+
+```{r}
+iris %>% 
+    group_by(Species) %>%
+    e_charts(Sepal.Length) %>% 
+    e_scatter(Petal.Length, Sepal.Width)
+```
+
+```{r}
+v <- LETTERS[1:10]
+matrix <- data.frame(
+  x = sample(v, 300, replace = TRUE), 
+  y = sample(v, 300, replace = TRUE), 
+  z = rnorm(300, 10, 1),
+  stringsAsFactors = FALSE
+) %>%
+  dplyr::group_by(x, y) %>%
+  dplyr::summarise(z = sum(z)) %>% 
+  dplyr::ungroup()
+
+matrix %>%
+  e_charts(x) %>%
+  e_heatmap(y, z) %>%
+  e_visual_map(z)
+```
+
+```{r}
+USArrests %>%
+  tibble::rownames_to_column("State")%>%
+  dplyr::mutate(
+    Rape = -Rape
+  ) %>%
+  e_charts(State) %>%
+  e_area(Murder)%>%
+  e_bar(Rape, name = "Sick basterd", x_index = 1) %>% # second y axis 
+  e_mark_line("Sick basterd", data = list(type = "average")) %>%
+  e_mark_point("Murder", data = list(type = "min"))
+```
+
+```{r}
+library(dplyr)
+df <- tibble(
+  name = "earth",        # 1st level
+  children = list(
+    tibble(name = c("land", "ocean"),             # 2nd level
+       children = list(
+         tibble(name = c("forest", "river")),   # 3rd level 
+         tibble(name = c("fish", "kelp"),
+            children = list(
+               tibble(name = c("shark", "tuna"),  # 4th level 
+               NULL  # kelp
+            ))
+         )
+       ))
+  )
+)
+
+df  %>%
+  e_charts()  %>%
+  e_tree()
+```
+
