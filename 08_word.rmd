@@ -1,0 +1,55 @@
+---
+title: "文档革命：用flextable生成报告中的表格"
+output: 
+  word_document:
+    #reference_docx: "C://work//new_document//word-template.docx"
+    fig_caption: TRUE
+    toc: yes
+toc-title: "目录"
+---
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+setwd("C:/work/new_document")
+```
+
+\newpage
+
+## 文档革命：用flextable生成报告中的表格
+
+R的极客理想系列文章，涵盖了R的思想，使用，工具，创新等的一系列要点，以我个人的学习和体验去诠释R的强大。
+
+R语言作为统计学一门语言，一直在小众领域闪耀着光芒。直到大数据的爆发，R语言变成了一门炙手可热的数据分析的利器。随着越来越多的工程背景的人的加入，R语言的社区在迅速扩大成长。现在已不仅仅是统计领域，教育，银行，电商，互联网….都在使用R语言。
+
+要成为有理想的极客，我们不能停留在语法上，要掌握牢固的数学，概率，统计知识，同时还要有创新精神，把R语言发挥到各个领域。让我们一起动起来吧，开始R的极客理想。
+
+## 转载请注明出处：
+
+<http://blog.fens.me/r-table-flextable/>
+
+## 前言
+
+flextable包，为我们提供了强大的表格处理功能。
+
+## 目录
+
+1. flextable包介绍
+2. 创建一个基本表格
+3. 表头，表体，表尾
+4. 表体内容样式
+5. 表格合并
+6. 表格扩展
+
+\newpage
+
+## 1. flextable包介绍
+
+flextable包，可以轻松创建用于报告和发布的表格。提供的功能允许用户创建表格，修改和格式化其内容以及定义其内容。
+
+表格可以嵌入到：
+
++ R 标记文档，支持 HTML、文字、PDF 和幻灯片文档。
++ 微软Word或PowerPoint文档与包裹官员。
++ 表格也可以渲染为R图或图形文件（png，pdf和jpeg）。
+
