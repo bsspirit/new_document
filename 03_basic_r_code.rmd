@@ -1,0 +1,67 @@
+---
+title: "basic"
+author: "dan"
+date: '2022-11-02'
+output: html_document
+---
+  
+  ```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+行内代码：sum(1:10)=`r sum(1:10)`
+
+代码块
+```{r cars}
+summary(cars)
+```
+
+
+
+调用R函数
+```{r}
+a<-Sys.Date()
+a
+
+head(iris)
+plot(iris)
+```
+
+处理时间序列
+```{r}
+library(xts)
+xdf<-xts(rnorm(100),order.by=as.Date("2022-01-01")+1:100)
+plot(xdf)
+```
+
+
+
+静态图1
+```{r}
+library(ggplot2)
+g<-ggplot(data=CO2,aes(conc,uptake,color=Plant))
+g<-g+geom_line()
+g
+```
+
+静态图2
+```{r}
+ggplot(CO2, aes(x=Plant,uptake)) +     
+  geom_boxplot(aes(fill=Plant))
+```
+
+
+DT动态表格
+```{r}
+library(DT)
+datatable(iris)
+```
+
+echarts4r动态图
+```{r}
+library(echarts4r)
+library(magrittr)
+iris %>% 
+  e_charts(x=Sepal.Length) %>%
+  e_scatter(serie=Sepal.Width)  
+```

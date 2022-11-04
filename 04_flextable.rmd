@@ -1,0 +1,169 @@
+---
+title: "flextable"
+author: "dan"
+date: '2022-11-04'
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(flextable)
+library(magrittr)
+library(officer)
+library(data.table)
+```
+
+```{r}
+# 设置表格的默认样式
+set_flextable_defaults(
+  font.size = 10, theme_fun = theme_vanilla,
+  padding.left = 6,padding.right = 6,
+  background.color = "#EFEFEF")
+
+# 加载数据集
+ft<-flextable(head(mtcars))
+
+# 设置表格的标题
+ft <- set_caption(ft, caption = "TABLE 1: Motor Trend Car Road Tests")
+
+# 设置header，共11列按4，2，5来分三段
+ft <- add_header_row(ft,
+  colwidths = c(4,2,5),
+  values = c("AAA", "BBB", "CCC")
+)
+
+# 让第一行header居中对齐
+ft <- align(ft, i = 1, part = "header", align = "center")
+
+# 通过条件设置颜色
+ft <- color(ft, ~ wt > 3, ~ wt, color = "red")
+
+# 通过条件设置粗体
+ft <- bold(ft, ~ hp > 100, ~ hp, bold = TRUE)
+
+# 设置表格的页脚
+ft <- add_footer_lines(ft, "The data was extracted from the 1974 Motor Trend US magazine, and comprises fuel consumption and 10 aspects of automobile design and performance for 32 automobiles (1973–74 models).")
+
+# 设置页脚的样式
+ft <- color(ft, part = "footer", color = "#666666")
+
+ft
+```
+
+```{r}
+set_flextable_defaults(
+  font.size = 10, font.family = "Helvetica",
+  font.color = "#1ba555",
+  table.layout = "fixed",
+  border.color = "blue",
+  padding.top = 3, padding.bottom = 3,
+  padding.left = 4, padding.right = 4)
+
+ft<-flextable(mtcars[1:6,1:4])
+ft
+
+ft<-style(ft,i = 1, 
+        pr_t = fp_text_default(
+          italic = TRUE, 
+          color = "red")) %>% 
+  style(i = 2, j = 3:4, 
+        pr_t = fp_text_default(
+          shading.color = "yellow"),
+        pr_p = fp_par(
+          text.align = "center", padding = 1))
+ft
+
+ft<-fontsize(ft,i = ~ cyl %in% "6", size = 10) %>% 
+  font(part = "all", fontname = "Courier") %>% 
+  color(part = "header", color = "#e22323", j = c("mpg", "hp", "disp")) %>% 
+  bold(part = "header", j = c("mpg", "hp")) %>% 
+  italic(part = "all", j = "cyl") %>% 
+  highlight(i = ~ disp < 200, color = "wheat", j = c("mpg", "hp"))
+ft
+```
+
+```{r}
+myft <- as.data.frame(matrix(runif(5*5), ncol = 5)) %>% 
+  flextable() %>% 
+  colformat_double() %>% autofit() %>% 
+  align(align = "center", part = "all") %>% 
+  bg(bg = "black", part = "header") %>% 
+  color(color = "white", part = "all") %>% 
+  bg(bg = scales::col_numeric(palette = "viridis", domain = c(0, 1)))
+myft
+
+big_border = fp_border(color="red", width = 2)
+small_border = fp_border(color="yellow", width = 1)
+myft <- border_inner_h(myft, part="all", border = big_border )
+myft <- border_inner_v(myft, part="all", border = small_border )
+myft
+
+
+myft<- merge_at(myft,i = 1:2, j = 1)
+myft<- merge_h_range ( myft, i =  ~ V5 < 0.5,j1="V4",j2="V5")
+myft
+```
+
+```{r}
+ft <- flextable(head(airquality)) 
+ft <- set_header_labels(ft, Solar.R = "Solar R (lang)", 
+    Temp = "Temperature (degrees F)", Wind = "Wind (mph)",
+    Ozone = "Ozone (ppb)" )
+ft <- set_table_properties(ft, layout = "autofit", width = .8)
+ft
+```
+
+```{r}
+library(ftExtra)
+library(flextable)
+
+data.frame(
+    x = c("**bold**", "*italic*"),
+    y = c("^superscript^", "~subscript~"),
+    z = c("***^ft^~Extra~** is*", "*Cool*")
+  ) %>% 
+  flextable() %>% 
+  colformat_md()
+
+```
+
+```{r}
+library(crosstable)
+head(ggplot2::mpg)
+crosstable(ggplot2::mpg, cols = c("class", "displ"), by = drv) %>% 
+  crosstable::as_flextable()
+
+```
+
+
+```{r}
+library(ggplot2)
+
+gg_bars <- function(z) {
+  z <- scale(z)
+  z <- na.omit(z)
+  z <- data.frame(x = seq_along(z), z = z, w = z < 0)
+  ggplot(z, aes(x = x, y = z, fill = w)) +
+    geom_col(show.legend = FALSE) +
+    theme_void()
+}
+
+dat <- as.data.table(mtcars)
+z <- dat[,
+  lapply(.SD, function(x) list(gg_bars(x))),
+  by = c("vs", "am"), .SDcols = c("mpg", "disp", "drat")
+]
+ft <- flextable(z)
+ft <- compose(ft, 
+    j = c("mpg", "disp", "drat"),
+    value = as_paragraph(gg_chunk(value = ., height = .15, width = 1)),
+    use_dot = TRUE
+  )
+ft
+```
+
