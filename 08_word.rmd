@@ -2,8 +2,8 @@
 title: "文档革命：用flextable生成报告中的表格"
 output: 
   word_document:
-    #reference_docx: "C://work//new_document//word-template.docx"
     fig_caption: TRUE
+    reference_docx: "C://work//new_document//word-template.docx"
     toc: yes
 toc-title: "目录"
 ---
