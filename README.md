@@ -11,3 +11,4 @@ Markdown格式文档编写，已经从小众成为了一种主流的文档编写
 
 + 用R编写markdown格式文档， <http://blog.fens.me/r-markdown-rmarkdown/>
 + 在rmarkdown中编写数学公式， <http://blog.fens.me/r-markdown-math-latex/>
++ 2022 微软Build After Party：文档革命：用R语言进行可重复性文档编写， <http://blog.fens.me/meeting-ms-ignate-20221112/>
